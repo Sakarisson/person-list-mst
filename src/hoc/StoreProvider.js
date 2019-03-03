@@ -11,6 +11,7 @@ class StoreProvider extends React.Component {
     this.state = {
       store: personList.create(),
     };
+    window.store = this.state.store;
   }
 
   render() {
