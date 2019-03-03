@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import Person from './components/Person';
+import StoreProvider from './hoc/StoreProvider';
+import Routes from './components/Routes';
+import Header from './components/Header';
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 60em 1fr;
-  grid-template-areas: '. container .';
+  grid-template-areas:
+    '. header .'
+    '. container .';
   padding-top: 5em;
 `;
 
@@ -15,14 +20,17 @@ const InnerContainer = styled.div`
   grid-area: container;
 `;
 
-const App = ({ store }) => (
-  <Container>
-    <InnerContainer>
-      {store.persons.map(person => (
-        <Person person={person} key={person.id} />
-      ))}
-    </InnerContainer>
-  </Container>
+const App = () => (
+  <Router>
+    <StoreProvider>
+      <Container>
+        <Header />
+        <InnerContainer>
+          <Routes />
+        </InnerContainer>
+      </Container>
+    </StoreProvider>
+  </Router>
 );
 
 App.propTypes = {
