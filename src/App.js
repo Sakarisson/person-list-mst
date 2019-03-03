@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -32,11 +31,5 @@ const App = () => (
     </StoreProvider>
   </Router>
 );
-
-App.propTypes = {
-  store: PropTypes.shape({
-    persons: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default App;
