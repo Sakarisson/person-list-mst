@@ -6,16 +6,16 @@ import compose from '../../util/compose';
 import withStore from '../../hoc/withStore';
 import PersonListElement from './PersonListElement';
 
-const PersonList = ({ persons }) => (
+const PersonList = ({ people }) => (
   <div>
-    {persons.map(person => (
+    {people.map(person => (
       <PersonListElement person={person} key={person.id} />
     ))}
   </div>
 );
 
 PersonList.propTypes = {
-  persons: PropTypes.arrayOf(PropTypes.object).isRequired,
+  people: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default compose(

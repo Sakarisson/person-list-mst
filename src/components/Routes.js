@@ -7,7 +7,7 @@ import Person from './PersonList/PersonListElement';
 
 const Routes = ({ store }) => [
   <Route exact path="/" component={Home} key="home" />,
-  ...store.persons.map(person => (
+  ...store.people.map(person => (
     <Route
       exact
       path={`/people/${person.id}`}

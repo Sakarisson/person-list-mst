@@ -4,11 +4,11 @@ import Person from './person';
 
 const PersonList = types
   .model({
-    persons: types.array(Person),
+    people: types.array(Person),
   })
   .actions(self => ({
     addPerson(person) {
-      self.persons.push(person);
+      self.people.push(person);
     },
   }));
 

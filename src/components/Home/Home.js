@@ -9,14 +9,14 @@ import AddPeople from './AddPeople';
 
 const Home = ({ store }) => (
   <div>
-    <AddPeople people={store.persons} />
-    <PersonList persons={store.persons} />
+    <AddPeople people={store.people} />
+    <PersonList people={store.people} />
   </div>
 );
 
 Home.propTypes = {
   store: PropTypes.shape({
-    persons: PropTypes.arrayOf(PropTypes.object).isRequired,
+    people: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
 };
 
