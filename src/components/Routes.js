@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { observer } from 'mobx-react';
 
-import compose from '../util/compose';
 import withStore from '../hoc/withStore';
 import Home from './Home';
 import Person from './PersonList/PersonListElement';
@@ -19,7 +17,4 @@ const Routes = ({ store }) => [
   )),
 ];
 
-export default compose(
-  withStore,
-  observer,
-)(Routes);
+export default withStore(Routes);

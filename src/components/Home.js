@@ -6,10 +6,12 @@ import compose from '../util/compose';
 import withStore from '../hoc/withStore';
 import PersonList from './PersonList';
 
-const Home = ({ store }) => {
-  console.log('home rendered');
-  return <PersonList persons={store.persons} />;
-};
+const Home = ({ store }) => (
+  <div>
+    <p>Home</p>
+    <PersonList persons={store.persons} />
+  </div>
+);
 
 Home.propTypes = {
   store: PropTypes.shape({
