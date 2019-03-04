@@ -11,6 +11,18 @@ const Person = types
     get fullName() {
       return `${self.firstName} ${self.lastName}`;
     },
+  }))
+  .actions(self => ({
+    addFriend(id) {
+      const serialized = self.toJSON();
+      if (serialized.friends.includes(id) || id === self.id) {
+        return;
+      }
+      self.friends.push(id);
+      const index = self.toJSON().friends.findIndex(f => f === id);
+      const friend = self.friends[index];
+      friend.addFriend(self.id);
+    },
   }));
 
 export default Person;
