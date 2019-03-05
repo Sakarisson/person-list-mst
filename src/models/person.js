@@ -1,4 +1,5 @@
 import { types } from 'mobx-state-tree';
+import { last as _last } from 'lodash';
 
 const Person = types
   .model({
@@ -14,18 +15,15 @@ const Person = types
   }))
   .actions(self => ({
     addFriend(id) {
-      const serialized = self.toJSON();
-      if (serialized.friends.includes(id) || id === self.id) {
+      if (self.friends.find(f => f.id === id) !== undefined) {
         return;
       }
       self.friends.push(id);
-      const index = self.toJSON().friends.findIndex(f => f === id);
-      const friend = self.friends[index];
+      const friend = _last(self.friends);
       friend.addFriend(self.id);
     },
     removeFriend(id) {
-      const friends = Array.from(self.friends.values());
-      const index = friends.findIndex(f => f.id === id);
+      const index = self.friends.findIndex(f => f.id === id);
       if (index >= 0) {
         const toBeRemoved = self.friends[index];
         self.friends.splice(index, 1);
@@ -33,8 +31,7 @@ const Person = types
       }
     },
     clearFriends() {
-      const friendIds = Array.from(self.friends.values()).map(f => f.id);
-      friendIds.forEach(id => self.removeFriend(id));
+      self.friends.forEach(f => self.removeFriend(f.id));
     },
   }));
 
