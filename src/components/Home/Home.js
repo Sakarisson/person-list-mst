@@ -10,7 +10,7 @@ import AddPeople from './AddPeople';
 const Home = ({ store }) => (
   <div>
     <AddPeople people={store.people} />
-    <PersonList people={store.people} />
+    <PersonList store={store} />
   </div>
 );
 

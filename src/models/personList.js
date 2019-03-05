@@ -19,6 +19,11 @@ const PersonList = types
         lastName: faker.name.lastName(),
       });
     },
+    removePerson(id) {
+      const index = Array.from(self.people.values()).findIndex(p => p.id === id);
+      self.people[index].clearFriends();
+      self.people.splice(index, 1);
+    },
   }));
 
 export default PersonList;

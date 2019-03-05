@@ -23,6 +23,19 @@ const Person = types
       const friend = self.friends[index];
       friend.addFriend(self.id);
     },
+    removeFriend(id) {
+      const friends = Array.from(self.friends.values());
+      const index = friends.findIndex(f => f.id === id);
+      if (index >= 0) {
+        const toBeRemoved = self.friends[index];
+        self.friends.splice(index, 1);
+        toBeRemoved.removeFriend(self.id);
+      }
+    },
+    clearFriends() {
+      const friendIds = Array.from(self.friends.values()).map(f => f.id);
+      friendIds.forEach(id => self.removeFriend(id));
+    },
   }));
 
 export default Person;
