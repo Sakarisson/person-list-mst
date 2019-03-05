@@ -15,7 +15,8 @@ const Person = types
   }))
   .actions(self => ({
     addFriend(id) {
-      if (self.friends.find(f => f.id === id) !== undefined) {
+      // eslint-disable-next-line eqeqeq
+      if (self.friends.find(f => f.id == id) != undefined) {
         return;
       }
       self.friends.push(id);
