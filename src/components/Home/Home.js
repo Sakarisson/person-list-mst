@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 
@@ -10,7 +10,17 @@ import AddPeople from './AddPeople';
 const Home = ({ store }) => (
   <div>
     <AddPeople people={store.people} />
-    <PersonList store={store} />
+    {store.people.length > 1 && (
+      <button type="button" onClick={() => store.generateFriendships(5)}>
+        Generate friendships
+      </button>
+    )}
+    {!!store.people.length && (
+      <Fragment>
+        <p>People:</p>
+        <PersonList store={store} />
+      </Fragment>
+    )}
   </div>
 );
 

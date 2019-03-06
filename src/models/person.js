@@ -15,8 +15,14 @@ const Person = types
     get fullName() {
       return `${self.firstName} ${self.lastName}`;
     },
+    get friendCount() {
+      return self.friends.length;
+    },
   }))
   .actions(self => ({
+    isFriendsWith(friend) {
+      return self.friends.find(p => p.id === friend.id) !== undefined;
+    },
     addFriend(id) {
       // eslint-disable-next-line eqeqeq
       if (self.friends.find(f => f.id == id) != undefined) {
