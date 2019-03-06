@@ -1,18 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
 const PersonPage = ({ person }) => (
   <div>
     <p>{`${person.fullName}'s page`}</p>
+    <p>
+      {person.firstName} lives at {person.address.streetAddress}, {person.address.zipCode},{' '}
+      {person.address.city}
+    </p>
     <div>
-      friends:
+      {!!person.friends.length && 'friends:'}
       {person.friends.map(friend => (
-        <p key={friend.id}>{friend.fullName}</p>
+        <p key={friend.id}>
+          <Link to={`/people/${friend.id}`}>{friend.fullName}</Link>
+        </p>
       ))}
     </div>
   </div>
 );
 
-PersonPage.propTypes = {};
+PersonPage.propTypes = {
+  person: PropTypes.shape({
+    fullName: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
-export default PersonPage;
+export default observer(PersonPage);
