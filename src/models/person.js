@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { types } from 'mobx-state-tree';
 import { last as _last } from 'lodash';
 
@@ -70,6 +72,12 @@ const Person = types
     },
     clearFriends() {
       self.friends.forEach(f => self.removeFriend(f.id));
+    },
+    setSortBy(sortBy) {
+      self.friendsSortBy = sortBy;
+    },
+    setSortOrder(sortOrder) {
+      self.friendsSortOrder = sortOrder;
     },
   }));
 
