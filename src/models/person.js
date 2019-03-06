@@ -1,11 +1,14 @@
 import { types } from 'mobx-state-tree';
 import { last as _last } from 'lodash';
 
+import Address from './address';
+
 const Person = types
   .model({
     id: types.identifier,
     firstName: types.string,
     lastName: types.string,
+    address: Address,
     friends: types.array(types.reference(types.late(() => Person))),
   })
   .views(self => ({
