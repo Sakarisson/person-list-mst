@@ -46,11 +46,11 @@ const Person = types
       }
       return self.friends.concat().sort(getComparisonFunction(sortBy, sortOrder));
     },
-  }))
-  .actions(self => ({
     isFriendsWith(friend) {
       return self.friends.find(p => p.id === friend.id) !== undefined;
     },
+  }))
+  .actions(self => ({
     addFriend(id) {
       // eslint-disable-next-line eqeqeq
       if (self.friends.find(f => f.id == id) != undefined) {
