@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
+import styled from 'styled-components';
+
+const FriendsContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+`;
+
+const KeyDescription = styled.div`
+  font-weight: bold;
+  padding-bottom: 1em;
+`;
 
 const PersonPage = ({ person }) => (
   <div>
@@ -11,12 +22,18 @@ const PersonPage = ({ person }) => (
       {person.address.city}
     </p>
     <div>
-      {!!person.friends.length && 'friends:'}
-      {person.friends.map(friend => (
-        <p key={friend.id}>
-          <Link to={`/people/${friend.id}`}>{friend.fullName}</Link>
-        </p>
-      ))}
+      {!!person.friends.length && (
+        <FriendsContainer>
+          <KeyDescription>Full name</KeyDescription>
+          <KeyDescription>City</KeyDescription>
+          {person.sortedFriends.map(friend => (
+            <Fragment key={friend.id}>
+              <Link to={`/people/${friend.id}`}>{friend.fullName}</Link>
+              <div>{friend.address.city}</div>
+            </Fragment>
+          ))}
+        </FriendsContainer>
+      )}
     </div>
   </div>
 );
