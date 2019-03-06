@@ -3,12 +3,33 @@ import { last as _last } from 'lodash';
 
 import Address from './address';
 
+const sortByLenses = {
+  name: obj => obj.fullName,
+  city: obj => obj.address.city,
+};
+
+const comparisonOperators = {
+  ascending: lens => (a, b) => lens(a) > lens(b),
+  descending: lens => (a, b) => lens(a) < lens(b),
+};
+
+const getComparisonFunction = (sortBy, sortOrder) =>
+  comparisonOperators[sortOrder](sortByLenses[sortBy]);
+
 const Person = types
   .model({
     id: types.identifier,
     firstName: types.string,
     lastName: types.string,
     address: Address,
+    friendsSortBy: types.optional(
+      types.enumeration('FriendsSortBy', ['none', 'name', 'city']),
+      'none',
+    ),
+    friendsSortOrder: types.optional(
+      types.enumeration('FriendsSortOrder', ['ascending', 'descending']),
+      'ascending',
+    ),
     friends: types.array(types.reference(types.late(() => Person))),
   })
   .views(self => ({
@@ -17,6 +38,13 @@ const Person = types
     },
     get friendCount() {
       return self.friends.length;
+    },
+    get sortedFriends() {
+      const { friendsSortBy: sortBy, friendsSortOrder: sortOrder } = self;
+      if (sortBy === 'none') {
+        return self.friends;
+      }
+      return self.friends.concat().sort(getComparisonFunction(sortBy, sortOrder));
     },
   }))
   .actions(self => ({
