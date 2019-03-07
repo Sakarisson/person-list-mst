@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { compose } from 'recompose';
+import styled from 'styled-components';
 
 import withStore from '../../hoc/withStore';
 import PersonListElement from './PersonListElement';
 
+const PeopleContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto 100px;
+  width: 50%;
+`;
+
 const PersonList = ({ store }) => (
-  <div>
+  <PeopleContainer>
     {store.people.map(person => (
       <PersonListElement
         person={person}
@@ -15,7 +22,7 @@ const PersonList = ({ store }) => (
         key={person.id}
       />
     ))}
-  </div>
+  </PeopleContainer>
 );
 
 PersonList.propTypes = {

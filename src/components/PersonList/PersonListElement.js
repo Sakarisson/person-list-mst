@@ -1,20 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 const RemovePersonButton = styled.button``;
 
 const PersonListElement = ({ person: { id, fullName }, remove }) => (
-  <Container>
+  <Fragment>
     <Link to={`/people/${id}`}>{fullName}</Link>
     <RemovePersonButton onClick={remove}>Remove</RemovePersonButton>
-  </Container>
+  </Fragment>
 );
 
 PersonListElement.propTypes = {
