@@ -18,19 +18,22 @@ const comparisonOperators = {
 const getComparisonFunction = (sortBy, sortOrder) =>
   comparisonOperators[sortOrder](sortByLenses[sortBy]);
 
+export const sortByOptions = ['none', 'name', 'city'];
+const defaultSortBy = 'none';
+
+export const sortOrderOptions = ['ascending', 'descending'];
+const defaultSortOrder = 'ascending';
+
 const Person = types
   .model({
     id: types.identifier,
     firstName: types.string,
     lastName: types.string,
     address: Address,
-    friendsSortBy: types.optional(
-      types.enumeration('FriendsSortBy', ['none', 'name', 'city']),
-      'none',
-    ),
+    friendsSortBy: types.optional(types.enumeration('FriendsSortBy', sortByOptions), defaultSortBy),
     friendsSortOrder: types.optional(
-      types.enumeration('FriendsSortOrder', ['ascending', 'descending']),
-      'ascending',
+      types.enumeration('FriendsSortOrder', sortOrderOptions),
+      defaultSortOrder,
     ),
     friends: types.array(types.reference(types.late(() => Person))),
   })
