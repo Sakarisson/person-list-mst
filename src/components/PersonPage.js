@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import { compose } from 'recompose';
 import styled from 'styled-components';
 
 import SortSelect from './SortSelect';
@@ -77,13 +76,4 @@ PersonPage.propTypes = {
   }).isRequired,
 };
 
-export default compose(
-  // observer,
-  // withStateHandlers(({ person }) => ({
-  //   sortBy: person.friendsSortBy,
-  //   sortOrder: person.friendsSortOrder,
-  // }), {
-  //   setSortBy =
-  // }),
-  observer,
-)(PersonPage);
+export default observer(PersonPage);
