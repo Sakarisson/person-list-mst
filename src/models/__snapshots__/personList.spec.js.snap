@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`personList model adds person 1`] = `
+Object {
+  "people": Array [
+    Object {
+      "address": Object {
+        "city": "City",
+        "streetAddress": "Address",
+        "zipCode": "123",
+      },
+      "firstName": "Person",
+      "friends": Array [],
+      "friendsSortBy": "none",
+      "friendsSortOrder": "ascending",
+      "id": "1",
+      "lastName": "Persson",
+    },
+    Object {
+      "address": Object {
+        "city": "Town",
+        "streetAddress": "Weirdplace",
+        "zipCode": "321",
+      },
+      "firstName": "Jane",
+      "friends": Array [],
+      "friendsSortBy": "none",
+      "friendsSortOrder": "ascending",
+      "id": "2",
+      "lastName": "Doe",
+    },
+  ],
+  "sortBy": "none",
+  "sortOrder": "ascending",
+}
+`;
+
+exports[`personList model initializes properly 1`] = `
+Object {
+  "people": Array [],
+  "sortBy": "none",
+  "sortOrder": "ascending",
+}
+`;
+
+exports[`personList model initializes with existing people 1`] = `
+Object {
+  "people": Array [
+    Object {
+      "address": Object {
+        "city": "City",
+        "streetAddress": "Address",
+        "zipCode": "123",
+      },
+      "firstName": "Person",
+      "friends": Array [],
+      "friendsSortBy": "none",
+      "friendsSortOrder": "ascending",
+      "id": "1",
+      "lastName": "Persson",
+    },
+    Object {
+      "address": Object {
+        "city": "Town",
+        "streetAddress": "Weirdplace",
+        "zipCode": "321",
+      },
+      "firstName": "Jane",
+      "friends": Array [],
+      "friendsSortBy": "none",
+      "friendsSortOrder": "ascending",
+      "id": "2",
+      "lastName": "Doe",
+    },
+  ],
+  "sortBy": "none",
+  "sortOrder": "ascending",
+}
+`;
+
+exports[`personList model removes person 1`] = `
+Object {
+  "people": Array [
+    Object {
+      "address": Object {
+        "city": "Town",
+        "streetAddress": "Weirdplace",
+        "zipCode": "321",
+      },
+      "firstName": "Jane",
+      "friends": Array [],
+      "friendsSortBy": "none",
+      "friendsSortOrder": "ascending",
+      "id": "2",
+      "lastName": "Doe",
+    },
+  ],
+  "sortBy": "none",
+  "sortOrder": "ascending",
+}
+`;
