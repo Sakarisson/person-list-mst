@@ -1,8 +1,9 @@
 import { types } from 'mobx-state-tree';
-import faker from 'faker';
 
-import idGenerator from '../util/idGenerator';
 import Person from './person';
+
+export const sortByOptions = ['none', 'firstName', 'lastName'];
+export const sortOrderOptions = ['ascending', 'descending'];
 
 const PersonList = types
   .model({
@@ -11,18 +12,6 @@ const PersonList = types
   .actions(self => ({
     addPerson(person) {
       self.people.push(person);
-    },
-    addRandomPerson() {
-      self.addPerson({
-        id: idGenerator.id,
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        address: {
-          streetAddress: faker.address.streetAddress(),
-          city: faker.address.city(),
-          zipCode: faker.address.zipCode(),
-        },
-      });
     },
     removePerson(id) {
       const index = Array.from(self.people.values()).findIndex(p => p.id === id);
