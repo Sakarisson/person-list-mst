@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { compose } from 'recompose';
 
+import generateFriendships from '../../util/generateFriendships';
 import withStore from '../../hoc/withStore';
 import PersonList from '../PersonList';
 import AddPeople from './AddPeople';
@@ -11,7 +12,7 @@ const Home = ({ store }) => (
   <div>
     <AddPeople people={store.people} />
     {store.people.length > 1 && (
-      <button type="button" onClick={() => store.generateFriendships(5)}>
+      <button type="button" onClick={() => generateFriendships(store, 5)}>
         Generate friendships
       </button>
     )}

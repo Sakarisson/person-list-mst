@@ -65,6 +65,9 @@ const Person = types
       const friend = _last(self.friends);
       friend.addFriend(self.id);
     },
+    addManyFriends(ids) {
+      ids.forEach(id => self.addFriend(id));
+    },
     removeFriend(id) {
       const index = self.friends.findIndex(f => f.id === id);
       if (index >= 0) {
