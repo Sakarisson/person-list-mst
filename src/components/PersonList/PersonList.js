@@ -15,7 +15,7 @@ const PeopleContainer = styled.div`
 
 const PersonList = ({ store }) => (
   <PeopleContainer>
-    {store.people.map(person => (
+    {store.sortedPeople.map(person => (
       <PersonListElement
         person={person}
         remove={() => store.removePerson(person.id)}
