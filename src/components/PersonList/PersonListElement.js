@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { observer } from 'mobx-react';
 
 const RemovePersonButton = styled.button``;
 
@@ -19,4 +20,4 @@ PersonListElement.propTypes = {
   remove: PropTypes.func.isRequired,
 };
 
-export default PersonListElement;
+export default observer(PersonListElement);
