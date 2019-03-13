@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`personList model adds person 1`] = `
+exports[`personList actions adds person 1`] = `
 Object {
   "people": Array [
     Object {
@@ -48,51 +48,49 @@ Object {
   "people": Array [
     Object {
       "address": Object {
-        "city": "City",
-        "streetAddress": "Address",
-        "zipCode": "123",
+        "city": "a",
+        "streetAddress": "a",
+        "zipCode": "a",
       },
-      "firstName": "Person",
-      "friends": Array [],
+      "firstName": "Bob",
+      "friends": Array [
+        "2",
+      ],
       "friendsSortBy": "none",
       "friendsSortOrder": "ascending",
       "id": "1",
-      "lastName": "Persson",
+      "lastName": "Allison",
     },
     Object {
       "address": Object {
-        "city": "Town",
-        "streetAddress": "Weirdplace",
-        "zipCode": "321",
+        "city": "a",
+        "streetAddress": "a",
+        "zipCode": "a",
       },
-      "firstName": "Jane",
-      "friends": Array [],
+      "firstName": "Charles",
+      "friends": Array [
+        "1",
+        "3",
+      ],
       "friendsSortBy": "none",
       "friendsSortOrder": "ascending",
       "id": "2",
-      "lastName": "Doe",
+      "lastName": "Bobson",
     },
-  ],
-  "sortBy": "none",
-  "sortOrder": "ascending",
-}
-`;
-
-exports[`personList model removes person 1`] = `
-Object {
-  "people": Array [
     Object {
       "address": Object {
-        "city": "Town",
-        "streetAddress": "Weirdplace",
-        "zipCode": "321",
+        "city": "a",
+        "streetAddress": "a",
+        "zipCode": "a",
       },
-      "firstName": "Jane",
-      "friends": Array [],
+      "firstName": "Alice",
+      "friends": Array [
+        "2",
+      ],
       "friendsSortBy": "none",
       "friendsSortOrder": "ascending",
-      "id": "2",
-      "lastName": "Doe",
+      "id": "3",
+      "lastName": "Charlson",
     },
   ],
   "sortBy": "none",
