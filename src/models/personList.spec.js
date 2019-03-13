@@ -114,6 +114,12 @@ describe('personList', () => {
   });
 
   describe('views', () => {
+    it('gets a specific person when calling getPerson', () => {
+      const personList = PersonList.create({ people: mockPeople });
+      const person = mockPeople[0];
+      expect(personList.getPerson(person.id).id).toBe(person.id);
+    });
+
     it('sorts by firstName in ascending order', () => {
       const personList = PersonList.create({
         sortBy: 'firstName',

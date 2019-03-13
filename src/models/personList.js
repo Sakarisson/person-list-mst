@@ -29,6 +29,9 @@ const PersonList = types
     get sortedPeople() {
       return self.people.concat().sort(getComparisonFunction(self.sortBy, self.sortOrder));
     },
+    getPerson(id) {
+      return self.people.find(p => p.id === id);
+    },
   }))
   .actions(self => ({
     addPerson(person) {
