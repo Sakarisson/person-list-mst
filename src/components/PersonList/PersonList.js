@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
+import { useObserver } from 'mobx-react-lite';
 
-import compose from '../../util/compose';
 import withStore from '../../hoc/withStore';
 import PersonListElement from './PersonListElement';
 
-const PersonList = ({ store }) => (
-  <div>
-    {store.people.map(person => (
-      <PersonListElement
-        person={person}
-        remove={() => store.removePerson(person.id)}
-        key={person.id}
-      />
-    ))}
-  </div>
-);
+const PersonList = ({ store }) =>
+  useObserver(() => (
+    <div>
+      {store.people.map(person => (
+        <PersonListElement
+          person={person}
+          remove={() => store.removePerson(person.id)}
+          key={person.id}
+        />
+      ))}
+    </div>
+  ));
 
 PersonList.propTypes = {
   store: PropTypes.shape({
@@ -24,7 +24,4 @@ PersonList.propTypes = {
   }).isRequired,
 };
 
-export default compose(
-  withStore,
-  observer,
-)(PersonList);
+export default withStore(PersonList);
