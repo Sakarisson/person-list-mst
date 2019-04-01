@@ -1,5 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
+import { compose } from 'recompose';
+import { observer } from 'mobx-react';
 
 import withStore from '../hoc/withStore';
 import Home from './Home';
@@ -17,4 +20,8 @@ const Routes = ({ store }) => [
   )),
 ];
 
-export default withStore(Routes);
+export default compose(
+  withRouter,
+  withStore,
+  observer,
+)(Routes);

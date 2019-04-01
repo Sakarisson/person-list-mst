@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+import { useObserver } from 'mobx-react-lite';
 
 const RemovePersonButton = styled.button``;
 
-const PersonListElement = ({ person: { id, fullName }, remove }) => (
-  <Container>
-    <Link to={`/people/${id}`}>{fullName}</Link>
-    <RemovePersonButton onClick={remove}>Remove</RemovePersonButton>
-  </Container>
-);
+const PersonListElement = ({ person, remove }) =>
+  useObserver(() => (
+    <Fragment>
+      <Link to={`/people/${person.id}`}>{person.fullName}</Link>
+      <RemovePersonButton onClick={remove}>Remove</RemovePersonButton>
+    </Fragment>
+  ));
 
 PersonListElement.propTypes = {
   person: PropTypes.shape({

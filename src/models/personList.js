@@ -1,29 +1,41 @@
 import { types } from 'mobx-state-tree';
-import faker from 'faker';
-import { min as _min, shuffle as _shuffle } from 'lodash';
 
-import idGenerator from '../util/idGenerator';
 import Person from './person';
+
+const sortByLenses = {
+  none: () => true,
+  firstName: obj => obj.firstName,
+  lastName: obj => obj.lastName,
+};
+
+const comparisonOperators = {
+  ascending: lens => (a, b) => lens(a) > lens(b),
+  descending: lens => (a, b) => lens(a) < lens(b),
+};
+
+const getComparisonFunction = (sortBy, sortOrder) =>
+  comparisonOperators[sortOrder](sortByLenses[sortBy]);
+
+export const sortByOptions = ['none', 'firstName', 'lastName'];
+export const sortOrderOptions = ['ascending', 'descending'];
 
 const PersonList = types
   .model({
     people: types.array(Person),
+    sortBy: types.optional(types.enumeration('SortBy', sortByOptions), 'none'),
+    sortOrder: types.optional(types.enumeration('SortOrder', sortOrderOptions), 'ascending'),
   })
+  .views(self => ({
+    get sortedPeople() {
+      return self.people.concat().sort(getComparisonFunction(self.sortBy, self.sortOrder));
+    },
+    getPerson(id) {
+      return self.people.find(p => p.id === id);
+    },
+  }))
   .actions(self => ({
     addPerson(person) {
       self.people.push(person);
-    },
-    addRandomPerson() {
-      self.addPerson({
-        id: idGenerator.id,
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        address: {
-          streetAddress: faker.address.streetAddress(),
-          city: faker.address.city(),
-          zipCode: faker.address.zipCode(),
-        },
-      });
     },
     removePerson(id) {
       const index = Array.from(self.people.values()).findIndex(p => p.id === id);
@@ -33,22 +45,11 @@ const PersonList = types
     clearAllFriends() {
       self.people.forEach(p => p.clearFriends());
     },
-    generateFriendships(numberOfFriends = 1) {
-      self.clearAllFriends();
-      self.people.forEach(p => {
-        const potentialNewFriends = self.people.filter(
-          other =>
-            !other.isFriendsWith(p) && other.friendCount < numberOfFriends && other.id !== p.id,
-        );
-        const initialFriendCount = p.friends.length;
-        const potentialNewFriendsCount = potentialNewFriends.length;
-        if (initialFriendCount >= numberOfFriends || potentialNewFriendsCount === 0) {
-          return;
-        }
-        const toBeAdded = _min([numberOfFriends, potentialNewFriendsCount]);
-        const newFriends = _shuffle(potentialNewFriends).slice(0, toBeAdded);
-        newFriends.forEach(f => p.addFriend(f.id));
-      });
+    setSortBy(sortBy) {
+      self.sortBy = sortBy;
+    },
+    setSortOrder(sortOrder) {
+      self.sortOrder = sortOrder;
     },
   }));
 

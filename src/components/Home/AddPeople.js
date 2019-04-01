@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import generateRandomPerson from '../../util/generateRandomPerson';
 import withStore from '../../hoc/withStore';
 
 const addPeople = (store, count) => {
   for (let i = 0; i < count; i += 1) {
-    store.addRandomPerson();
+    store.addPerson(generateRandomPerson());
   }
 };
 

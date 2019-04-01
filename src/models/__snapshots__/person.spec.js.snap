@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Person model initializes a new person 1`] = `
+Object {
+  "address": Object {
+    "city": "City",
+    "streetAddress": "Street",
+    "zipCode": "123",
+  },
+  "firstName": "John",
+  "friends": Array [],
+  "friendsSortBy": "none",
+  "friendsSortOrder": "ascending",
+  "id": "mock",
+  "lastName": "Doe",
+}
+`;

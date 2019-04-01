@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useObserver } from 'mobx-react-lite';
+import styled from 'styled-components';
 
 import withStore from '../../hoc/withStore';
 import PersonListElement from './PersonListElement';
 
+const PeopleContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto 100px;
+  width: 50%;
+`;
+
 const PersonList = ({ store }) =>
   useObserver(() => (
-    <div>
-      {store.people.map(person => (
+    <PeopleContainer>
+      {store.sortedPeople.map(person => (
         <PersonListElement
           person={person}
           remove={() => store.removePerson(person.id)}
           key={person.id}
         />
       ))}
-    </div>
+    </PeopleContainer>
   ));
 
 PersonList.propTypes = {
